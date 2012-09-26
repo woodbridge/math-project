@@ -25,7 +25,7 @@
     local-redis))
 
 (defn log-choice [choice]
-  (redis/with-server redis-config
+  (redis/with-server (redis-config)
     (redis/incr choice)))
 
 (defn stats  []
