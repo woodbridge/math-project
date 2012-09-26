@@ -32,8 +32,8 @@
   (redis/with-server
     (redis-config)
     (do
-      (let [raw {:a (read-string (redis/get "a"))
-                 :b (read-string  (redis/get "b"))}
+      (let [raw {:a (read-string (or (redis/get "a") "0") )
+                 :b (read-string  (or (redis/get "b") "0"))}
             total (+ (:a raw) (:b raw))
             stats-map {:a-percent (float (/ (:a raw) total)) 
                        :b-percent (float (/ (:b raw) total))
