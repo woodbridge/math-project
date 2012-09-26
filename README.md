@@ -1,6 +1,6 @@
 # math-project
 
-A website written in noir. 
+Nothing much here, just a small project for math class.
 
 ## Usage
 
@@ -13,7 +13,7 @@ lein run
 
 ## License
 
-Copyright (C) 2011 FIXME
+Copyright (C) 2011 Justin Woodbridge
 
 Distributed under the Eclipse Public License, the same as Clojure.
 
