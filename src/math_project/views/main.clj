@@ -80,7 +80,7 @@
       [:h3 "Is this anynomous?"]
       [:p "Yes."]
       [:h3 "Can I see the code?"]
-      [:a {:href "#"} "Yes."]])))
+      [:a {:href "https://github.com/woodbridge/math-project"} "Yes."]])))
 
 (defpage [:post "/choose"] {:keys [choice]}
   (session/put! :used "true")
