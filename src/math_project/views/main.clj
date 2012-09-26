@@ -6,9 +6,23 @@
             [noir.session :as session])
   (:use [noir.core :only [defpage]]
         [hiccup.page :only [html5]]
-        [hiccup.core :only [html]]))
+        [hiccup.core :only [html]]
+        [clojure.string :only [split]])
+  (:import java.net.URI))
 
-(def redis-config {:host "127.0.0.1" :port 6379 :db 0})
+(def my-uri "redis://redistogo:7558083462d3234c70917d38e6abdea1@cod.redistogo.com:10199/")
+
+(def local-redis {:host "127.0.0.1" :port 6379 :db 0})
+
+(defn redis-config []
+  (if-let [redis-url (System/getenv "REDISTOGO_URL")]
+    (let [uri (java.net.URI. redis-url)
+          auth (split (.getUserInfo uri) #":")]  
+      {:host (.getHost uri)
+       :port (.getPort uri)
+       :db 0
+       :password (last auth)})
+    local-redis))
 
 (defn log-choice [choice]
   (redis/with-server redis-config
@@ -16,7 +30,7 @@
 
 (defn stats  []
   (redis/with-server
-    redis-config
+    (redis-config)
     (do
       (let [raw {:a (read-string (redis/get "a"))
                  :b (read-string  (redis/get "b"))}
@@ -93,6 +107,6 @@
 (defpage [:post "/thoughts"] {}
   (let [params (:params (request/ring-request))]
     (let [thoughts (:text params)]
-      (redis/with-server redis-config
+      (redis/with-server (redis-config)
         (redis/lpush "thoughts" thoughts))
       (resp/json {:status "ok"}))))
