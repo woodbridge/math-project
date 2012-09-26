@@ -50,7 +50,7 @@
     [:img.a {:src "/img/a.jpeg" :data-choice "a"}]]
    [:section#b.choice
     [:h2 "B"]
-    [:img.b {:src "/img/a.jpeg" :data-choice "b"}]]))
+    [:img.b {:src "/img/b.jpg" :data-choice "b"}]]))
 
 ;; Routes
 
@@ -80,9 +80,9 @@
     (common/layout
      [:h1 "Thank you for playing!"]
      [:section#stats-results
-      [:h2.a-results (str (Math/round (* 100 (:a-percent results)))) "% of people so far chose A"]
-      [:h2.b-results (str (Math/round (* 100 (:b-percent results)))) "% of people so far chose B"]
-      [:p.total (str (:total results) " people have played.  Please send it around.")]
+      [:h2.a-results (str (Math/round (* 100 (:a-percent results)))) "% of people so far chose Justin as a child."]
+      [:h2.b-results (str (Math/round (* 100 (:b-percent results)))) "% of people so far chose the panda."]
+      [:p.total (str (:total results) " people have played.  Please send it around so we can get more data!")]
       [:form {:id "why"}
        [:textarea
         {:placeholder "Care to explain your choice?"}]
